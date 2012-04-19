@@ -17,6 +17,6 @@
 # ETS 3
 try:
     from enthought.traits.api import *
-# ETS 4
+# ETS 4 .
 except ImportError:
     from traits.api import *
