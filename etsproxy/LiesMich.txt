@@ -1,0 +1,109 @@
+ETS Proxy - <ETS3 - ETS4> 19.April.2012
+
+Inhalt:
+1. Anwendung und Funktion
+2. Neues Projekt mit ETS Proxy erstellen
+3. Altes Projekt fuer ETS Proxy konvertieren
+4. ETS Proxy erweitern
+
+1. Anwendung und Funktion
+	Mit der einfuehrung von ETS 4 wurden die namespaces der Module geaendert.
+	Fuer eine unabhaengige Entwicklung wird nun der ETS Proxy eingefuehrt,
+	der automatisch die richtigen namespaces, je nach lokal vorhandener ETS
+	Version auswaehlt.
+	ETS Proxy orientiert sich dabei an den Namespaces der Version ETS 3, wobei
+	der Namespace "enthought." durch "etsproxy." zu ersetzen ist.
+
+    Bsp.: ETS 3: 	from enthought.traits.api import *
+	  ETS Proxy: 	from etsproxy.traits.api import * 
+	
+	Dabei muss das Packet etsproxy in das Projekt eingebunden werden:
+	- Projekt markieren und rechtsklick
+	- Properties>Project References
+	- etsproxy mit einem Haeckchen einbinden
+
+	ETS Proxy enthaelt bisher nur die in Simvisage und Oricrete verwendeten 
+	Module von ETS, kann aber nach belieben erweitert werden.
+
+2. Neues Projekt mit ETS Proxy erstellen
+	Erstellen sie wie gewohnt ein Projekt. Nun muessen sie ETS Proxy in das
+	Projekt einbinden:
+	- Projekt markieren und rechtsklick
+	- Properties>Project References
+	- etsproxy mit einem Haeckchen einbinden
+	Anschliessend koennen sie ETS Proxy verwenden. ETS Proxy orientiert sich 
+	dabei an den Namespaces der Version ETS 3, wobei der Namespace "enthought." 
+	durch "etsproxy." zu ersetzen ist.
+
+    Bsp.: ETS 3: 	from enthought.traits.api import *
+	  ETS Proxy: 	from etsproxy.traits.api import *
+
+3. Altes Projekt fuer ETS Proxy konvertieren
+	Zuerst muessen sie ETS Proxy in das zu konvertierende Projekt einbinden:
+	- Projekt markieren und rechtsklick
+	- Properties>Project References
+	- etsproxy mit einem Haeckchen einbinden
+	Dann muessen sie die alten namespace aendern. In Eclipse geschieht dies
+	am effektivsten ueber die Search Funktion:
+	- Markieren sie alle Projekte und/oder Dateien die bearbeitet werden sollen
+	- klicken sie in der Menueleiste auf Search>Search... (Ctrl+H)
+	- Waehlen sie den Reiter File Search
+	- unter containing text: geben sie enthought. ein (wichtig mit Punkt)
+	- unter scope waehlen sie selectet resources
+	- klicken sie nun den Replace Button
+	- geben sie bei With: etsproxy. ein (auch hier mit Punkt)
+	- wenn sie nun auf OK klicken werden alle namespaces so geaendert, das ETS 
+	  Proxy verwedet werden kann
+
+4. ETS Proxy erweitern:
+	Wollen sie ein ETS Modul verwenden, dass noch nicht in ETS Proxy vorhanden 
+	ist, muessen sie ETS Proxy erweitern.
+	Die Pfadstrucktur entspricht dabei der von ETS3, lediglich der namespace 
+	enthought. wurde durch den namespace etsproxy. ersetzt.
+	Fügen sie an der entsprechenden Stelle, wo das gewünschte Modul liegen soll
+	ein	neues PyDev Modul als <Empty> ein, eventuell müssen sie vorher noch ein
+	paar neue PyDev Packages anlegen. Benennen sie das neue PyDev Modul so, wie
+	es in ETS3 benannt ist. Damit sollte sich ein Pfad ergeben, der sich nur 
+	durch den geänderten namespace von ETS3 unterscheidet. Kopieren sie 
+	anschließend folgenden Code (zwischen den Sternchen) in die datei:
+
+*******************************************************************************	
+#-------------------------------------------------------------------------------
+#
+# Copyright (c) 2012
+# IMB, RWTH Aachen University,
+# ISM, Brno University of Technology
+# All rights reserved.
+#
+# This software is provided without warranty under the terms of the BSD
+# license included in the Spirrid top directory "licence.txt" and may be
+# redistributed only under the conditions described in the aforementioned
+# license.
+#
+# Thanks for using Simvisage open source!
+#
+#-------------------------------------------------------------------------------
+
+# ETS 3
+try:
+    from enthought.<gewünschtes modul> import *
+# ETS 4
+except ImportError:
+    from <modul unter ETS 4> import *
+    
+*******************************************************************************    
+
+	Jetzt müssen sie noch die neuen Importpfade angeben. Unter # ETS 3 
+	der Pfad mit altem namespace. Unter # ETS 4 mit neuem namespace.
+	Achtung bei ETS 4 wurde zum Teil nicht nur der enthought. namespace
+	weggelassen.(zB. enthought.traits.ui.api => traitsui.api)
+	Am besten schaut man sich die neuen namespaces unter folgendem link an:
+	
+	https://github.com/enthought/etsproxy/tree/master/enthought
+	
+	Dieser ETS Proxy ist von Enthought erstellt, soll aber lediglich der
+	Überbrückung dienen bis der eigene Code vollständig auf ETS4 konvertiert 
+	wurde.
+	Die Strucktur dieses ETS Proxys entspricht ebenfalls der von ETS 3 und
+	in den einzelnen Moduldateine steht dann der entsprechende Pfad für ETS4.
+	
