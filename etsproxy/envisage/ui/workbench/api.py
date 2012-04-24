@@ -19,4 +19,4 @@ try:
     from enthought.envisage.ui.workbench.api import *
 # ETS 4
 except ImportError:
-    from envisage.ui.workbench import *
+    from envisage.ui.workbench.api import *
