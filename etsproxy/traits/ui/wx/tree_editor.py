@@ -14,9 +14,9 @@
 #
 #-------------------------------------------------------------------------------
 
-# ETS 3
 try:
-    from enthought.chaco.plot_label import *
+# ETS 3
+    from enthought.traits.ui.wx.tree_editor import *
 # ETS 4
 except ImportError:
-    from chaco.plot_label import *
+    from traitsui.wx.tree_editor import *

@@ -16,7 +16,7 @@
 
 # ETS 3
 try:
-    from enthought.chaco.plot_label import *
+    from enthought.mayavi.core.engine import *
 # ETS 4
 except ImportError:
-    from chaco.plot_label import *
+    from mayavi.core.engine import *
