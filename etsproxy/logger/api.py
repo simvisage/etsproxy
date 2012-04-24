@@ -12,8 +12,6 @@
 #
 # Thanks for using Simvisage open source!
 #
-#
-# here is the change
 #-------------------------------------------------------------------------------
 
 # ETS 3
