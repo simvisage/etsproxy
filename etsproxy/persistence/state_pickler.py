@@ -16,7 +16,7 @@
 
 # ETS 3
 try:
-    from enthought.persistance.state_pickler import *
+    from enthought.persistence.state_pickler import *
 # ETS 4
 except ImportError:
-    from apptools.persistance.state_pickler import *
+    from apptools.persistence.state_pickler import *
